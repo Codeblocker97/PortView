@@ -25,21 +25,21 @@ object NetworkModule {
         explicitNulls = false
     }
 
-    @Provides @Singleton
-    fun provideOkHttp(): OkHttpClient =
-        OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BASIC
-            }).build()
+        @Provides @Singleton
+        fun provideOkHttp(): OkHttpClient =
+            OkHttpClient.Builder()
+                .addInterceptor(HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                }).build()
 
-    @Provides @Singleton
-    fun provideRetrofit(json: Json, okHttp: OkHttpClient): Retrofit =
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
-            .client(okHttp)
-            .build()
+        @Provides @Singleton
+        fun provideRetrofit(json: Json, okHttp: OkHttpClient): Retrofit =
+            Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+                .client(okHttp)
+                .build()
 
-    @Provides @Singleton
-    fun provideApi(retrofit: Retrofit): HoldingsApi = retrofit.create(HoldingsApi::class.java)
-}
+        @Provides @Singleton
+        fun provideApi(retrofit: Retrofit): HoldingsApi = retrofit.create(HoldingsApi::class.java)
+    }
