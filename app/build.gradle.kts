@@ -56,6 +56,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.junit.ktx)
+    testImplementation(libs.junit)
     ksp(libs.hilt.android.compiler)
     // Retrofit
     implementation(libs.retrofit)
@@ -68,6 +70,9 @@ dependencies {
     ksp(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test) // For testing coroutines
+    testImplementation(libs.mockk) // MockK for mocking dependencies
+    testImplementation(libs.turbine) // For testing StateFlow emissions easily
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
